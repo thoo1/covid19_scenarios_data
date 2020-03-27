@@ -69,8 +69,6 @@ def getHemispheres():
         for entries in  csv.reader(fh, quotechar='"', delimiter=',',
                      quoting=csv.QUOTE_ALL, skipinitialspace=True):        
             if len(entries) > sub_region_index:
-                #if (entries[sub_region_index] not in hemiDict[mn]) and (entries[sub_region_index] not in hemiDict[ms]) and (entries[sub_region_index] not in hemiDict[eq]):
-                #    print(entries[sub_region_index])
                 if not entries[name_index] == 'Antarctica': 
                     toHemisphere[entries[name_index]] = hemiDict2[entries[sub_region_index]]
 
@@ -126,7 +124,6 @@ def parse():
     
 
     with open(os.path.join(BASE_PATH, JSON_DIR,TMP_POPULATION), 'w') as fh:
-        print('dumping to ',os.path.join(BASE_PATH, JSON_DIR,TMP_POPULATION))
         json.dump(pops, fh)
 
 
