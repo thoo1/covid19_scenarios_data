@@ -61,7 +61,6 @@ def getHemispheres():
         for j in hemiDict[i]:
             hemiDict2[j] = i
     
-    print(hemiDict2)
     with open(os.path.join(BASE_PATH, TMP_CODES)) as fh:
         header = [x.strip('"') for x in fh.readline().strip().split(',')]
         name_index = header.index('name')
