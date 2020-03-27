@@ -117,10 +117,14 @@ def parse():
         d['data']['cases'] = d['name'] if d['name'] in regions else 'none'
 
     # Set epidemiology based on country_codes
-    hemispheres = getHemispheres()    
+    hemispheres = getHemispheres()
+    toThreeLetter, toName = getCountryAbbreviations()
     for d in pops:
-        d['data']['hemisphere'] = hemispheres[d['name']] if d['name'] in hemispheres else 'none'
-    
+        if not d['name'][:3] in toName:
+            d['data']['epidemiology'] = hemispheres[d['name']] if d['name'] in hemispheres else 'none'
+        else:
+            parentName = toName[d['name'][:3]]
+            d['data']['epidemiology'] = hemispheres[parentName] if parentName in hemispheres else 'none'
 
     with open(os.path.join(BASE_PATH, JSON_DIR,TMP_POPULATION), 'w') as fh:
         json.dump(pops, fh)
